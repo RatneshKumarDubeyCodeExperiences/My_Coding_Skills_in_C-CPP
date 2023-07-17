@@ -1,0 +1,53 @@
+bool isPossible(vector<int>& arr, int n, int m, int mid) {
+    int pagesCount = 0;
+    int studentCount = 1;
+
+    for (int i = 0; i < n; i++) {
+        if (mid >= pagesCount + arr[i]) {
+            pagesCount += arr[i];
+        } else {
+            studentCount++;
+            pagesCount = arr[i];
+        }
+
+        if (studentCount > m || arr[i] > mid) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int findPages(vector<int>& arr, int n, int m) {
+    if (n < m) {
+        return -1;  // Not enough books to allocate to each student
+    }
+
+    int start = 0;
+    int sum = 0;  // Variable to store the sum of all book pages
+    int end, ans, mid;
+    bool result;
+
+    // Calculate the sum of all book pages
+    for (int i : arr) {
+        sum += i;
+    }
+
+    end = sum;
+    mid = start + (end - start) / 2;
+
+    while (start <= end) {
+        result = isPossible(arr, n, m, mid);
+
+        if (result) {
+            ans = mid;
+            end = mid - 1;
+        } else {
+            start = mid + 1;
+        }
+
+        mid = start + (end - start) / 2;
+    }
+
+    return ans;
+}
