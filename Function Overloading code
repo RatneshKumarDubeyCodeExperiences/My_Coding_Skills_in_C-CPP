@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int volume(int n){
+    return n * n * n;
+}
+
+int volume(int a, int b, int c){
+    return a*b*c;
+}
+int volume(int r, int h){
+    return (22 * r * r * h)/7;
+}
+
+int main() {
+    int k,m,n;
+    cin>>n>>m>>k;
+    cout<< "your no is "<<volume(3,14)<<endl;
+    cout<< "volume is " <<volume(4)<<endl;
+    cout<<"area " <<volume(1,2,4)<<endl;
+    return 0;
+}
